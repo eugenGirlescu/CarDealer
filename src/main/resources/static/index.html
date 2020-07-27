@@ -1,0 +1,18 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Spring 4 Security + Thymeleaf Integration Example </title>
+</head>
+<body>
+<h3> WELCOME</h3>
+
+<form th:action="@{/}" method="POST">
+    <p>
+        Welcome to the Spring MVC Quickstart application!
+        Get started quickly by signing up.
+    </p>
+    <p>
+        <a href="/register" th:href="@{/register}" class="btn btn-large btn-success">Sign up</a>
+    </p>
+</form>
+</body>
+</html>
