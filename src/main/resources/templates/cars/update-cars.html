@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Update Cars</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container my-5">
+    <h3> Update Cars</h3>
+    <div class="card">
+        <div class="card-body">
+            <div class="col-md-8">
+                <form action="#" th:action="@{/cars/edit/{id}(id=${cars.id})}" th:object="${cars}" method="post">
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="model" class="col-form-label">Model</label> <input type="text" th:field="*{model}" class="form-control" id="model" placeholder="Model"> <span th:if="${#fields.hasErrors('model')}" th:errors="*{model}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="year" class="col-form-label">Year</label> <input type="text" th:field="*{year}" class="form-control" id="year" placeholder="Year"> <span th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="fuel" class="col-form-label">Fuel</label> <input type="text" th:field="*{fuel}" class="form-control" id="fuel" placeholder="Fuel"> <span th:if="${#fields.hasErrors('fuel')}" th:errors="fuel" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="seats" class="col-form-label">Seats</label> <input type="text" th:field="*{seats}" class="form-control" id="seats" placeholder="Seats"> <span th:if="${#fields.hasErrors('seats')}" th:errors="seats" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="color" class="col-form-label">Color</label> <input type="text" th:field="*{color}" class="form-control" id="color" placeholder="Color"> <span th:if="${#fields.hasErrors('color')}" th:errors="color" class="text-danger"></span>
+                        </div>
+                        <div class="form-group col-md-8">
+                            <label for="gearBox" class="col-form-label">Gearbox</label> <input type="text" th:field="*{gearBox}" class="form-control" id="gearBox" placeholder="Gearbox"> <span th:if="${#fields.hasErrors('gearBox')}" th:errors="gearBox" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <input type="submit" class="btn btn-primary" value="Update Car">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>

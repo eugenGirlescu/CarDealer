@@ -16,7 +16,7 @@ import javax.validation.Valid;
 public class Register {
 
     @Autowired
-    private UserService userService;
+    private final UserService userService;
 
     public Register(UserService userService) {
         this.userService = userService;
@@ -24,7 +24,7 @@ public class Register {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView showRegisterForm() {
-        ModelAndView mv = new ModelAndView("register");
+        ModelAndView mv = new ModelAndView("user/register");
         mv.addObject("user", new User()); // this is required to display the form
         return mv;
     }
@@ -35,28 +35,26 @@ public class Register {
             @RequestParam("lastName") String lastName,
             @RequestParam("email") String email,
             @RequestParam("password") String password,
-            @RequestParam("checkPassword") String checkPassword,
             @Valid User user, BindingResult result, Model model) {
-
+            //here i save users in db if everything is ok
         if (result.hasErrors()) {
-            return "register";
+            return "user/register";
         } else {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setEmail(email);
             user.setPassword(password);
-            user.setCheckPassword(checkPassword);
             User valid = userService.findByEmail(user.getEmail());
 
             if (valid == null) {
                 userService.saveUser(user);
                 String msg = "Userul a fost inregistrat cu succes!";
                 model.addAttribute("msg", msg);
-                return "register";
+                return "welcome";
             } else {
                 String msg = "Emailul a mai fost folosit !";
                 model.addAttribute("msg", msg);
-                return "register";
+                return "user/register";
             }
         }
 
