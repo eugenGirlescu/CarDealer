@@ -2,6 +2,7 @@ package com.car.carDealer.controller;
 
 import com.car.carDealer.model.User;
 import com.car.carDealer.service.UserService;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 @Controller
@@ -21,7 +24,7 @@ public class Login {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView showLoginForm() {
-        ModelAndView mv = new ModelAndView();
+        ModelAndView mv = new ModelAndView("user/login");
         mv.addObject("user", new User());
         return mv;
     }
@@ -29,27 +32,31 @@ public class Login {
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ModelAndView login(@RequestParam("email") String email,
                               @RequestParam("password") String password,
-                              User user,
+                              @Valid User user,
                               BindingResult result,
                               Model model) {
 
         ModelAndView mod = new ModelAndView();
 
         if (result.hasErrors()) {
-            mod.setViewName("login");
+            mod.setViewName("user/login");
         }
         user.setEmail(email);
         user.setPassword(password);
         User valid = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
 
         if (valid != null) {
-            mod.setViewName("welcome");
+            mod.setViewName("hello");
         } else {
             String msg = "Userul nu este inregistrat";
             model.addAttribute("msg", msg);
-            mod.setViewName("login");
+            mod.setViewName("user/login");
         }
         return mod;
     }
+
+
+
 }
+
 

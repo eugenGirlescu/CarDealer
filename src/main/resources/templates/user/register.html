@@ -13,8 +13,6 @@
     <td th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></td>
     <p>Password: <input type="text" th:field="*{password}"/></p>
     <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
-    <p> Check Password: <input type="text" th:field="*{checkPassword}"/></p>
-    <td th:if="${#fields.hasErrors('checkPassword')}" th:errors="*{checkPassword}"></td>
     <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
     <p th:text="${msg}"></p>
 </form>
