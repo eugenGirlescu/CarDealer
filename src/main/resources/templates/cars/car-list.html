@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Users</title>
+    <title>Adauga  </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
@@ -14,26 +14,50 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="/cars/list">Parc Auto Bals</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/register">Inregistrare</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Logare</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cars/list">Lista masini</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <div class="container my-2">
     <div class="card">
         <div class="card-body">
             <div th:switch="${cars}" class="container my-5">
                 <p class="my-5">
                     <a href="/cars/add" class="btn btn-primary"><i
-                            class="fas fa-user-plus ml-2">Add Cars</i></a>
+                            class="fa fa-car" aria-hidden="true">Adauga</i></a>
                 </p>
-                <div class="col-md-10">
+                <div class="col-md-12">
                     <h2 th:case="null">No Cars yet!</h2>
                     <div th:case="*">
                         <table class="table table-striped table-responsive-md">
                             <thead>
                             <tr>
                                 <th>Model</th>
-                                <th>Year</th>
-                                <th>Fuel</th>
-                                <th>Seats</th>
-                                <th>Color</th>
-                                <th>Gearbox</th>
+                                <th>An</th>
+                                <th>Combustibil</th>
+                                <th>Numar locuri</th>
+                                <th>Culoare</th>
+                                <th>Cutie viteze</th>
+                                <th>Pret</th>
+                                <th>Moneda</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                             </tr>
@@ -46,10 +70,12 @@
                                 <td th:text="${car.seats}"></td>
                                 <td th:text="${car.color}"></td>
                                 <td th:text="${car.gearBox}"></td>
+                                <td th:text="${car.price}"></td>
+                                <td th:text="${car.coin}"></td>
                                 <td><a th:href="@{/cars/edit/{id}(id=${car.id})}" class="btn btn-primary"><i
-                                        class="fas fa-user-edit ml-2"></i></a></td>
+                                        class="fa fa-pencil-square" aria-hidden="true">Edit</i></a></td>
                                 <td><a th:href="@{/cars/delete/{id}(id=${car.id})}" class="btn btn-primary"><i
-                                        class="fas fa-user-times ml-2"></i></a></td>
+                                        class="fa fa-pencil ">Sterge</i></a></td>
                             </tr>
                             </tbody>
                         </table>

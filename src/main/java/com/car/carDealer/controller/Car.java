@@ -10,17 +10,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-public class CarController {
+public class Car {
 
     @Autowired
     private final CarRepository carRepository;
 
-    public CarController(CarRepository carRepository) {
+    public Car(CarRepository carRepository) {
         this.carRepository = carRepository;
     }
 
@@ -37,10 +36,7 @@ public class CarController {
     }
 
     @PostMapping(value = "/cars/add")
-    public String addCars(@Valid Cars cars, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            return "cars/add-car";
-        }
+    public String addCars(Cars cars, BindingResult result, Model model) {
         carRepository.save(cars);
         return "redirect:/cars/list";
     }
@@ -56,11 +52,7 @@ public class CarController {
     }
 
     @PostMapping(value = "/cars/edit/{id}")
-    public String updateCar(@PathVariable("id") int id, Model model, @Valid Cars cars, BindingResult result) {
-        if (result.hasErrors()) {
-            cars.setId(id);
-            return "cars/update-cars";
-        }
+    public String updateCar(@PathVariable("id") int id, Model model, Cars cars, BindingResult result) {
         carRepository.save(cars);
         model.addAttribute("cars", carRepository.findAll());
         return "redirect:/cars/list";

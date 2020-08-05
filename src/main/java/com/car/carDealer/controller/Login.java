@@ -30,31 +30,28 @@ public class Login {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(@RequestParam("email") String email,
-                              @RequestParam("password") String password,
-                              @Valid User user,
-                              BindingResult result,
-                              Model model) {
+    public ModelAndView login(
+            @Valid User user,
+            BindingResult result,
+            Model model) {
 
         ModelAndView mod = new ModelAndView();
 
         if (result.hasErrors()) {
             mod.setViewName("user/login");
         }
-        user.setEmail(email);
-        user.setPassword(password);
+
         User valid = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
 
         if (valid != null) {
             mod.setViewName("hello");
         } else {
-            String msg = "Userul nu este inregistrat";
+            String msg = "Verificati emailul sau parola !";
             model.addAttribute("msg", msg);
             mod.setViewName("user/login");
         }
         return mod;
     }
-
 
 
 }
