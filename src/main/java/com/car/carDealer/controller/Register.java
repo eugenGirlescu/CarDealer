@@ -31,19 +31,10 @@ public class Register {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String register(
-            @RequestParam("firstName") String firstName,
-            @RequestParam("lastName") String lastName,
-            @RequestParam("email") String email,
-            @RequestParam("password") String password,
             @Valid User user, BindingResult result, Model model) {
-            //here i save users in db if everything is ok
         if (result.hasErrors()) {
             return "user/register";
         } else {
-            user.setFirstName(firstName);
-            user.setLastName(lastName);
-            user.setEmail(email);
-            user.setPassword(password);
             User valid = userService.findByEmail(user.getEmail());
 
             if (valid == null) {
@@ -52,7 +43,7 @@ public class Register {
                 model.addAttribute("msg", msg);
                 return "welcome";
             } else {
-                String msg = "Emailul a mai fost folosit !";
+                String msg = "Emailul a mai fost inregistrat! Va rugam folositi alt email !";
                 model.addAttribute("msg", msg);
                 return "user/register";
             }

@@ -15,68 +15,141 @@
 </head>
 
 <body>
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="/cars/list">Parc Auto Bals</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/register">Inregistrare</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Logare</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cars/list">Lista masini</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 <div class="container my-5">
-    <h3> Add Car</h3>
+    <h3>Adauga masini :</h3>
     <div class="card">
         <div class="card-body">
             <div class="col-md-10">
                 <form action="#" th:action="@{/cars/add}" th:object="${cars}" method="post">
                     <div class="row">
                         <div class="form-group col-md-8">
-                            <label for="model" class="col-form-label">Model</label> <input type="text"
-                                                                                           th:field="*{model}"
-                                                                                           class="form-control"
-                                                                                           id="model"
-                                                                                           placeholder="Model"> <span
-                                th:if="${#fields.hasErrors('model')}" th:errors="*{model}" class="text-danger"></span>
-                        </div>
-                        <div class="form-group col-md-8">
-                            <label for="year" class="col-form-label">Year</label> <input type="text" th:field="*{year}"
-                                                                                         class="form-control" id="year"
-                                                                                         placeholder="Year"> <span
-                                th:if="${#fields.hasErrors('year')}" th:errors="*{year}" class="text-danger"></span>
+                            <legend>
+                                <label for="model" class="col-form-label">Model</label> <input type="text"
+                                                                                               th:field="*{model}"
+                                                                                               class="form-control"
+                                                                                               id="model"
+                                                                                               placeholder="Model"
+                                                                                               required>
+                            </legend>
                         </div>
 
                         <div class="form-group col-md-8">
-                            <label for="fuel" class="col-form-label"> Fuel</label> <input type="text" th:field="*{fuel}"
-                                                                                          class="form-control" id="fuel"
-                                                                                          placeholder="Fuel"> <span
-                                th:if="${#fields.hasErrors('fuel')}" th:errors="*{fuel}" class="text-danger"></span>
+                            <legend>
+                                <label for="year" class="col-form-label">An fabricatie :</label>
+                            </legend>
+                            <select th:field="*{year}" id="year">
+                                <option th:each="year : ${#numbers.sequence(1990, #dates.year(#dates.createNow()))}"
+                                        th:value="${year}" th:text="${year}">
+                                </option>
+                            </select>
                         </div>
 
                         <div class="form-group col-md-8">
-                            <label for="seats" class="col-form-label"> Seats</label> <input type="text"
-                                                                                            th:field="*{seats}"
-                                                                                            class="form-control"
-                                                                                            id="seats"
-                                                                                            placeholder="Seats"> <span
-                                th:if="${#fields.hasErrors('seats')}" th:errors="*{seats}" class="text-danger"></span>
+                            <legend>
+                                <label class="col-form-label">Combustibil :</label><br>
+                            </legend>
+                            <input type="radio" name="fuel" th:field="*{fuel}"
+                                   value="benzina +  gpl" required> benzina+gpl<br>
+                            <input type="radio" name="fuel" th:field="*{fuel}"
+                                   value="motorina + gpl" required> motorina+gpl<br>
+                            <input type="radio" name="fuel" th:field="*{fuel}"
+                                   value="motorina" required> motorina<br>
+                            <input type="radio" name="fuel" th:field="*{fuel}"
+                                   value="benzina" required> benzina
+
                         </div>
 
                         <div class="form-group col-md-8">
-                            <label for="color" class="col-form-label"> Color</label> <input type="text"
-                                                                                            th:field="*{color}"
-                                                                                            class="form-control"
-                                                                                            id="color"
-                                                                                            placeholder="Color"> <span
-                                th:if="${#fields.hasErrors('color')}" th:errors="*{color}" class="text-danger"></span>
+                            <legend>
+                                <label for="seats" class="col-form-label">Numar locuri :</label>
+                            </legend>
+                            <select th:field="*{seats}" id="seats">
+                                <option th:each="seats : ${#numbers.sequence(0, 10)}"
+                                        th:value="${seats}" th:text="${seats}">
+                                </option>
+                            </select>
                         </div>
 
                         <div class="form-group col-md-8">
-                            <label for="gearBox" class="col-form-label"> Gearbox</label> <input type="text"
-                                                                                                th:field="*{gearBox}"
-                                                                                                class="form-control"
-                                                                                                id="gearBox"
-                                                                                                placeholder="Gearbox">
-                            <span th:if="${#fields.hasErrors('gearBox')}" th:errors="*{gearBox}"
-                                  class="text-danger"></span>
+                            <legend>
+                                <label for="color" class="col-form-label">Culoare :</label> <input type="text"
+                                                                                                   th:field="*{color}"
+                                                                                                   class="form-control"
+                                                                                                   id="color"
+                                                                                                   placeholder="Color"
+                                                                                                   required>
+
+                            </legend>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <legend>
+                                <label class="col-form-label">Cutie viteze :</label><br>
+                            </legend>
+                            <input type="radio" name="gear" th:field="*{gearBox}"
+                                   value="automat" required> automata<br>
+                            <input type="radio" name="gear" th:field="*{gearBox}"
+                                   value="manual" required> manuala<br>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <legend>
+                                <label for="price" class="col-form-label">Pret :</label></legend>
+                            <input type="text"
+                                   th:field="*{price}"
+                                   class="form-control"
+                                   id="price"
+                                   placeholder="Price"
+                                   required>
+
+                            <select th:field="*{coin}" id="coin">
+                                <option th:value="EUR">EUR</option>
+                                <option th:value="USD">USD</option>
+                                <option th:value="LEI">LEI</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-8">
+                            <legend>
+                                <label for="price" class="col-form-label">Incarca poze :</label></legend>
+                            <form action="/action_page.php">
+                                <label for="img">Selecteaza imaginea :</label>
+                                <input type="file" id="img" name="img" accept="image/*" multiple>
+                            </form>
                         </div>
 
                         <div class="col-md-6">
-                            <input type="submit" class="btn btn-primary" value="Add Car">
+                            <input type="submit" class="btn btn-primary" value="Adauga masina">
                         </div>
 
                         <div class="form-group col-md-8"></div>
+
+                        <div class="form-group col-md-8">
+                            <a class="btn btn-primary" href="/cars/list">Renunta</a>
+                        </div>
 
                     </div>
                 </form>
@@ -85,5 +158,4 @@
     </div>
 </div>
 </body>
-
 </html>

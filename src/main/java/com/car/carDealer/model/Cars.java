@@ -16,7 +16,7 @@ public class Cars {
 
     private int year;
 
-    @NotEmpty
+
     private String fuel;
 
 
@@ -25,8 +25,11 @@ public class Cars {
     @NotEmpty
     private String color;
 
-    @NotEmpty
     private String gearBox;
+
+    private int price;
+
+    private String coin;
 
     public int getId() {
         return id;
@@ -82,5 +85,17 @@ public class Cars {
 
     public void setGearBox(String gearBox) {
         this.gearBox = gearBox;
+    }
+
+    public void setPrice(int price){this.price = price;}
+
+    public int getPrice(){return price;}
+
+    public void setCoin(String coin) {
+        this.coin = coin;
+    }
+
+    public String getCoin() {
+        return coin;
     }
 }
