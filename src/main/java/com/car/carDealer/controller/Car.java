@@ -63,7 +63,7 @@ public class Car {
         Cars cars = carRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid car Id:" + id));
         carRepository.delete(cars);
-        model.addAttribute("cars", carRepository.findAll());
+        //model.addAttribute("cars", carRepository.findAll());
         return "redirect:/cars/list";
     }
 

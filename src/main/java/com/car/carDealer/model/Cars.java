@@ -13,12 +13,9 @@ public class Cars {
     @NotEmpty
     private String model;
 
-
     private int year;
 
-
     private String fuel;
-
 
     private int seats;
 

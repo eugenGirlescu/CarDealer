@@ -36,7 +36,6 @@ public class Register {
             return "user/register";
         } else {
             User valid = userService.findByEmail(user.getEmail());
-
             if (valid == null) {
                 userService.saveUser(user);
                 String msg = "Userul a fost inregistrat cu succes!";
@@ -48,7 +47,5 @@ public class Register {
                 return "user/register";
             }
         }
-
     }
-
 }
