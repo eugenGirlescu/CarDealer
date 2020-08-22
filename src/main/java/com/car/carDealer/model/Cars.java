@@ -10,7 +10,6 @@ public class Cars {
     @GeneratedValue(strategy = GenerationType.AUTO)
     public int id;
 
-    @NotEmpty
     private String model;
 
     private int year;
@@ -19,7 +18,6 @@ public class Cars {
 
     private int seats;
 
-    @NotEmpty
     private String color;
 
     private String gearBox;

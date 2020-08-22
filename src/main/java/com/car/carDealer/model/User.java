@@ -29,13 +29,16 @@ public class User {
     @Size(min = 4, max = 10, message = "Parola trebuie sa contina minim 4 caractere")
     private String password;
 
+    private String role;
+
 
     public User() {};
-    public User(String firstName, String lastName, String email, String password) {
+    public User(String firstName, String lastName, String email, String password,String role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.role = role;
 
     }
 
@@ -55,6 +58,8 @@ public class User {
         this.password = password;
     }
 
+    public void setRole(String role){this.role = role;}
+
     public String getFirstName() {
         return this.firstName;
     }
@@ -70,6 +75,9 @@ public class User {
     public String getPassword() {
         return this.password;
     }
+
+    public String getRole(){return this.role;}
+
 
 
 }
