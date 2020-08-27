@@ -28,30 +28,6 @@ public class Login {
         mv.addObject("user", new User());
         return mv;
     }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(
-            @Valid User user,
-            BindingResult result,
-            Model model) {
-
-        ModelAndView mod = new ModelAndView();
-
-        if (result.hasErrors()) {
-            mod.setViewName("user/login");
-        }
-
-        User valid = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
-
-        if (valid != null) {
-            mod.setViewName("hello");
-        } else {
-            String msg = "Verificati emailul sau parola !";
-            model.addAttribute("msg", msg);
-            mod.setViewName("user/login");
-        }
-        return mod;
-    }
 }
 
 

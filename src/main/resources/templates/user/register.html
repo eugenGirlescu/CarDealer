@@ -28,7 +28,7 @@ form:before {
 </head>
 <body>
 <nav th:replace="layouts :: foo"></nav>
-<form action="#" th:action="@{/register}" th:object="${user}" method="post">
+<form action="#" th:action="@{/register}" th:object="${user}" method="post" id="register">
     <section id="cover" class="min-vh-100">
         <div id="cover-caption">
             <div class="container">
@@ -60,7 +60,7 @@ form:before {
                                     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
                                 </div>
                                 <p th:text="${msg}"></p>
-                                <button type="submit" class="btn btn-primary btn-lg">Sign up</button>
+                                <button type="submit" class="btn btn-primary btn-lg" th:onclick="submitForm()">Sign up</button>
                             </form>
                         </div>
                     </div>

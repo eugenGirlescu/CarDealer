@@ -6,11 +6,11 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import javax.validation.groups.Default;
 
 @Entity
 @Table(name = "users")
 public class User {
-
 
     @NotEmpty(message = "Campul nu poate fi lasat gol")
     @Size(min = 4, max = 16,message = "Dimensiunea trebuie sa fie intre 4 si 16 caractere")
@@ -26,11 +26,12 @@ public class User {
     private String email;
 
     @NotEmpty(message = "Campul nu poate fi gol")
-    @Size(min = 4, max = 10, message = "Parola trebuie sa contina minim 4 caractere")
+    @Size(min = 4, max = 60, message = "Parola trebuie sa contina minim 4 caractere")
     private String password;
-
+    @Column()
     private String role;
 
+    private boolean enabled = true;
 
     public User() {};
     public User(String firstName, String lastName, String email, String password,String role) {
@@ -77,7 +78,5 @@ public class User {
     }
 
     public String getRole(){return this.role;}
-
-
 
 }
