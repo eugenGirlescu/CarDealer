@@ -36,11 +36,13 @@ public class Login {
             Model model) {
 
         ModelAndView mod = new ModelAndView();
+
         if (result.hasErrors()) {
             mod.setViewName("user/login");
         }
 
         User valid = userService.findByEmailAndPassword(user.getEmail(), user.getPassword());
+
         if (valid != null) {
             mod.setViewName("hello");
         } else {

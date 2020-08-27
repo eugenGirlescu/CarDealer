@@ -2,7 +2,9 @@ package com.car.carDealer.service;
 
 import com.car.carDealer.model.User;
 import com.car.carDealer.repository.UserRepository;
+import com.sun.istack.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -10,10 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class UserService {
 
     @Autowired
-    private UserRepository userRep;
+    private final UserRepository userRep;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    BCryptPasswordEncoder bCryptEncoder;
+
+    @Autowired
+    public UserService(UserRepository userRep) {
         this.userRep = userRep;
     }
 
