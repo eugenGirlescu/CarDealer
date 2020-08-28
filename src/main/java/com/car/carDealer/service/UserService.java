@@ -15,6 +15,9 @@ public class UserService {
     private final UserRepository userRep;
 
     @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    @Autowired
     BCryptPasswordEncoder bCryptEncoder;
 
     @Autowired
@@ -31,8 +34,7 @@ public class UserService {
     }
 
     public void saveUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRep.save(user);
     }
-
-
 }

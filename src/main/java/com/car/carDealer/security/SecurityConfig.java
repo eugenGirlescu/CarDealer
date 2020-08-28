@@ -22,10 +22,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication().dataSource(dataSource)
-                .usersByUsernameQuery("select email,password" +
-                        "from users where email = ?")
-                .authoritiesByUsernameQuery("select email,role" +
-                        "from users where email =?")
+                .usersByUsernameQuery(" select email ,password , enabled "
+                      +" from users where email = ? ")
+                .authoritiesByUsernameQuery(" select email,role "
+                        +" from users where email =? ")
                 .dataSource(dataSource)
                 .passwordEncoder(bCryptEncoder);
     }

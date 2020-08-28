@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
+
 import javax.validation.Valid;
 
 @Controller
 public class Register {
-
-    @Autowired
-    BCryptPasswordEncoder bCryptEncoder;
 
     @Autowired
     UserService userService;
@@ -45,11 +43,8 @@ public class Register {
 
             User valid = userService.findByEmail(user.getEmail());
             if (valid == null) {
-                user.setPassword(bCryptEncoder.encode(user.getPassword()));
                 userService.saveUser(user);
-                String msg = "Userul a fost inregistrat cu succes!";
-                model.addAttribute("msg", msg);
-                return "user/register";
+                return "welcome";
             } else {
                 String msg = "Emailul a mai fost inregistrat! Va rugam folositi alt email !";
                 model.addAttribute("msg", msg);
