@@ -28,8 +28,8 @@ public class User {
     @NotEmpty(message = "Campul nu poate fi gol")
     @Size(min = 4, max = 60, message = "Parola trebuie sa contina minim 4 caractere")
     private String password;
-    @Column()
-    private String role;
+
+    private String role="ROLE_USER";
 
     private boolean enabled = true;
 
@@ -39,8 +39,7 @@ public class User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.role = role;
-
+        if(role != null) { this.role = role; };
     }
 
     public void setFirstName(String firstName) {

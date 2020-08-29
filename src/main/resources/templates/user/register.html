@@ -56,11 +56,15 @@ form:before {
                                 <input type ="hidden" name="_csrf" th:value="${_csrf.token}"/>
                                 <div class="form-group">
                                     <label class="sr-only">Password :</label>
-                                    <input type="text" class="form-control" th:field="*{password}" placeholder="Parola">
+                                    <input type="password" class="form-control" th:field="*{password}" placeholder="Parola" id="myInput">
+                                    <input type="checkbox" onclick="myFunction()">Show Password
                                     <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
                                 </div>
                                 <p th:text="${msg}"></p>
-                                <button type="submit" class="btn btn-primary btn-lg" th:onclick="submitForm()">Sign up</button>
+                                <button type="submit" class="btn btn-primary btn-lg">Sign up</button>
+                                <div class="container signin">
+                                    <p>Already have an account? <a th:href="@{/login}">Log in</a>.</p>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -69,5 +73,15 @@ form:before {
         </div>
     </section>
 </form>
+<script>
+function myFunction() {
+  var x = document.getElementById("myInput");
+  if (x.type === "password") {
+    x.type = "text";
+  } else {
+    x.type = "password";
+  }
+}
+</script>
 </body>
 </html>
