@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -64,5 +65,20 @@ public class Car {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid car Id:" + id));
         carRepository.delete(cars);
         return "redirect:/cars/list";
+    }
+
+    @GetMapping(value = "/cars/view")
+    public String showCarList(Model model) {
+        List<Cars> allCars = carRepository.findAll();
+        model.addAttribute("car", allCars);
+        return "cars/view-list";
+    }
+
+    @GetMapping(value = "/cars/view/{id}")
+    public String showCarDetails(@PathVariable("id") int id, Model model) {
+        Cars cars = carRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid car Id:" + id));
+        model.addAttribute("cars", cars);
+        return "cars/view-details";
     }
 }
