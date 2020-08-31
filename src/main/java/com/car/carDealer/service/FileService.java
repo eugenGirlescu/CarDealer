@@ -15,7 +15,7 @@ import java.nio.file.StandardCopyOption;
 @Service
 public class FileService {
 
-    @Value("${app.upload.dir:${user.home}}")
+   git branch
     public String uploadDir;
 
     public void uploadFile(MultipartFile file) {
